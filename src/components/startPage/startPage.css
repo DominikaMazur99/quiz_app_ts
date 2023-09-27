@@ -1,0 +1,44 @@
+.app-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.header-box {
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 20rem;
+    width: 80%;
+    border-radius: 2rem 2rem;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(251, 194, 255, 0.9766281512605042) 100%,
+        rgba(0, 212, 255, 1) 100%
+    );
+}
+
+.question-box {
+    position: absolute;
+    text-align: center;
+    top: 50%; /* Adjust vertical position to center vertically */
+    left: 50%; /* Adjust horizontal position to center horizontally */
+    transform: translate(-50%, -50%);
+    height: 10rem;
+    width: 60%;
+    border-radius: 2rem 2rem;
+    border: solid black;
+    background-color: white;
+    margin-top: 7rem;
+}
+
+.answer-box {
+    margin-top: 35rem;
+}
+.answer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
