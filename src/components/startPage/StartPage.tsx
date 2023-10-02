@@ -8,45 +8,71 @@ function StartPage() {
                 <h1>Quizz App</h1>
             </div>
             <div className="app-box">
-                {" "}
                 <div className="header-box">
-                    <div className="question-box">Pytanie</div>
-                    <div className="answer-box">
-                        <div className="answer">
+                    <div className="question-box">
+                        <div className="question">
                             <div>
-                                <Radio
-                                    // checked={selectedValue === "a"}
-                                    // onChange={()}
-                                    value="a"
-                                    name="radio-buttons"
-                                    inputProps={{ "aria-label": "A" }}
-                                />
+                                Przykładowe pytanie czyli jak masz na imię?
                             </div>
-                            <div>text</div>
                         </div>
-                        <div className="answer">
-                            <div>
-                                <Radio
-                                    // checked={selectedValue === "a"}
-                                    // onChange={()}
-                                    value="a"
-                                    name="radio-buttons"
-                                    inputProps={{ "aria-label": "A" }}
-                                />
+
+                        <div className="answer-box">
+                            <div className="answer">
+                                <div className="answer-element">
+                                    <div>
+                                        <Radio
+                                            // checked={selectedValue === "a"}
+                                            // onChange={()}
+                                            value="a"
+                                            name="radio-buttons"
+                                            inputProps={{ "aria-label": "A" }}
+                                        />
+                                    </div>
+                                    <div>text</div>
+                                </div>
                             </div>
-                            <div>text</div>
-                        </div>
-                        <div className="answer">
-                            <div>
-                                <Radio
-                                    // checked={selectedValue === "a"}
-                                    // onChange={()}
-                                    value="a"
-                                    name="radio-buttons"
-                                    inputProps={{ "aria-label": "A" }}
-                                />
+                            <div className="answer">
+                                <div className="answer-element">
+                                    <div>
+                                        <Radio
+                                            // checked={selectedValue === "a"}
+                                            // onChange={()}
+                                            value="a"
+                                            name="radio-buttons"
+                                            inputProps={{ "aria-label": "A" }}
+                                        />
+                                    </div>
+                                    <div>text</div>
+                                </div>
                             </div>
-                            <div>text</div>
+                            <div className="answer">
+                                <div className="answer-element">
+                                    <div>
+                                        <Radio
+                                            // checked={selectedValue === "a"}
+                                            // onChange={()}
+                                            value="a"
+                                            name="radio-buttons"
+                                            inputProps={{ "aria-label": "A" }}
+                                        />
+                                    </div>
+                                    <div>text</div>
+                                </div>
+                            </div>
+                            <div className="answer">
+                                <div className="answer-element">
+                                    <div>
+                                        <Radio
+                                            // checked={selectedValue === "a"}
+                                            // onChange={()}
+                                            value="a"
+                                            name="radio-buttons"
+                                            inputProps={{ "aria-label": "A" }}
+                                        />
+                                    </div>
+                                    <div>text</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
