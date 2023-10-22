@@ -9,7 +9,8 @@ import {
     calculateScore,
 } from "../../features/quiz/QuizSlice"; // Import the quizSlice actions
 import { RootState } from "../../store";
-import { Radio } from "@mui/material";
+import { GrNext } from "react-icons/gr";
+import { Button, Radio } from "@mui/material";
 import { Choice } from "../../services/types";
 
 import "../../App.css";
@@ -63,13 +64,13 @@ const Quiz: React.FC = () => {
             </div> */}
             <div className="flex flex-col">
                 <div className="flex items-center justify-center relative">
-                    <div className="absolute bg-white">
+                    <div className="absolute">
                         <QuestionProgress
                             currentQuestion={18}
                             totalQuestions={totalQuestions}
                         />
                     </div>
-                    <div className="flex items-center justify-center align-bottom flex-col rounded-xl border-2 border-indigo-100 px-8 mt-40 h-40">
+                    <div className="flex items-center justify-center align-bottom flex-col rounded-xl border border-customBlue px-8 mt-40 h-40 bg-white">
                         {" "}
                         {/* Updated this line */}
                         {question.question}
@@ -80,7 +81,7 @@ const Quiz: React.FC = () => {
                     {choicesArray?.map(
                         (choice: { id: string; text: string }, idx: number) => (
                             <div
-                                className="flex items-center justify-between h-12 w-102 border rounded-xl border-indigo-200"
+                                className="flex items-center justify-between h-12 w-102 border rounded-xl border-customBlue bg-white"
                                 key={idx}
                             >
                                 <div className="flex items-center space-x-5">
@@ -104,13 +105,18 @@ const Quiz: React.FC = () => {
                         </label>
                     </div>
                 ))} */}
-                <div className="justify-between">
-                    <button className="m-2" onClick={handleNextQuestion}>
+                <div className="flex justify-center text-center mt-10">
+                    <Button
+                        variant="outlined"
+                        endIcon={<GrNext />}
+                        onClick={handleNextQuestion}
+                        sx={{ backgroundColor: "white", color: "black" }}
+                    >
                         Next
-                    </button>
-                    <button className="m-2" onClick={handleCalculateScore}>
+                    </Button>
+                    {/* <button className="m-2" onClick={handleCalculateScore}>
                         Calculate Score
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </>

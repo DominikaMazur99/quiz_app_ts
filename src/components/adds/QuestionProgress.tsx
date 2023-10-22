@@ -15,7 +15,7 @@ function QuestionProgress({
     return (
         <div>
             {/* Circular Border */}
-            <div className="rounded-full w-full h-full flex items-center justify-center bg-indigo-100">
+            <div className="rounded-full w-full h-full flex items-center justify-center bg-white">
                 {/* CircularProgress (z-index: 1) */}
                 <CircularProgress
                     variant="determinate"
@@ -23,11 +23,11 @@ function QuestionProgress({
                     size={100}
                     className="z-10"
                     sx={{
-                        color: "indigo-600",
+                        color: "customBlue",
                     }}
                 />
             </div>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center text-customBlue">
                 {currentQuestion > 0 && (
                     <Typography
                         variant="caption"
