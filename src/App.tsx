@@ -1,19 +1,12 @@
-import React from "react";
-import { Container } from "@mui/material";
-import "./App.css";
-import { useGetQuizQuery } from "./services/quiz";
 import StartPage from "./components/startPage/StartPage";
 
-function App() {
-    const { data, error, isLoading } = useGetQuizQuery("linux");
+import "./App.css";
 
-    console.log(data);
+function App() {
     return (
-        <React.Fragment>
-            <Container maxWidth="md" sx={{ padding: "1rem" }}>
-                <StartPage />
-            </Container>
-        </React.Fragment>
+        <div className="container mx-auto px-4">
+            <StartPage />
+        </div>
     );
 }
 
