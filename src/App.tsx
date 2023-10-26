@@ -1,15 +1,18 @@
-import StartPage from "./components/startPage/StartPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import StartPage from "./components/startPage/StartPage";
+import Quiz from "./components/quizComponents/Quiz";
 
 function App() {
     return (
-        <div className=" h-screen mx-auto px-40">
-            {" "}
-            {/* Set background color and full height */}
-            <div className="container ">
-                <StartPage />
-            </div>
-        </div>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/home_page" element={<StartPage />} />
+                    <Route path="quiz" element={<Quiz />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 }
 

@@ -24,10 +24,6 @@ const Quiz: React.FC = () => {
     const totalQuestions = data?.length; // Safely access the length property
     console.log(totalQuestions);
 
-    useEffect(() => {
-        dispatch(startQuiz());
-    }, []);
-
     const handleNextQuestion = () => {
         dispatch(nextQuestion());
     };
@@ -66,7 +62,7 @@ const Quiz: React.FC = () => {
                 <div className="flex items-center justify-center relative">
                     <div className="absolute">
                         <QuestionProgress
-                            currentQuestion={18}
+                            currentQuestion={currentQuestion + 1}
                             totalQuestions={totalQuestions}
                         />
                     </div>
