@@ -14,13 +14,14 @@ function QuizScore() {
     const handleRestart = () => {
         dispatch(startQuiz());
         navigate("/");
+        localStorage.setItem("user", "");
     };
 
     return (
         <div className="flex flex-col items-center mt-40">
             <div className="shadow-lg border border-gray-300 rounded-lg p-6 w-80 h-70">
                 <div className="flex flex-col items-center">
-                    <img src={avatar} className="w-90 h-90" />
+                    <img src={avatar} alt="avatarImage" className="w-90 h-90" />
                     <p>{user},</p>
                     <div className="mt-10 flex items-center justify-center">
                         Congrats! You gained {totalPoints} points!

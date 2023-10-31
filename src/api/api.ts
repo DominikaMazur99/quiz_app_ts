@@ -1,3 +1,11 @@
-export type API_KEY = string;
+declare var process: {
+    env: {
+        REACT_APP_MY_API_KEY: string;
+    };
+};
 
-export const MY_API_KEY: API_KEY = "bNHL5IzBjERPr0gAOZKG41QHagqus2EOYLILhIVt";
+const apiKey = process.env.REACT_APP_MY_API_KEY;
+
+// Now, you can use apiKey throughout the file
+
+export const MY_API_KEY = apiKey;

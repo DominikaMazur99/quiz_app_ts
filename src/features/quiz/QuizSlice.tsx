@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { QuizState } from "../../services/types";
 
 const initialState: QuizState = {
-    questions: [], // Store questions fetched from the API
+    questions: [],
     currentQuestionIndex: -1,
     currentAnswer: "",
     questionIndex: 0,
@@ -23,9 +23,7 @@ export const quizSlice = createSlice({
         },
         nextQuestion: (state) => {
             state.currentQuestionIndex++;
-            console.log(state.score, "score");
         },
-        // Modify your reducer
         answerQuestion: (
             state,
             action: PayloadAction<{ answer: string; questionIndex: number }>
@@ -49,7 +47,6 @@ export const quizSlice = createSlice({
                         answer.toLowerCase()
                 ) {
                     state.score++; // Increment the score by 1 if the answer is correct
-                    console.log(state.score);
                 }
             } else {
                 console.error("Question not found or is undefined.");
