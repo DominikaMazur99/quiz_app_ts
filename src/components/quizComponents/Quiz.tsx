@@ -3,41 +3,54 @@ import { useGetQuizQuery } from "../../services/quiz";
 import QuestionProgress from "../adds/QuestionProgress";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    startQuiz,
     nextQuestion,
     answerQuestion,
     calculateScore,
-} from "../../features/quiz/QuizSlice"; // Import the quizSlice actions
+} from "../../features/quiz/QuizSlice";
 import { RootState } from "../../store";
 import { GrNext } from "react-icons/gr";
-import { Button, Radio } from "@mui/material";
+import { Box, Button, CircularProgress, Radio } from "@mui/material";
 import { Choice } from "../../services/types";
 
 import "../../App.css";
 
 const Quiz: React.FC = () => {
     const dispatch = useDispatch();
-    const { data, error, isLoading } = useGetQuizQuery("linux");
+    const { data, isLoading } = useGetQuizQuery("linux");
     const currentQuestion = useSelector(
         (state: RootState) => state.quiz.currentQuestionIndex
-    ); // Access currentQuestionIndex from the state
-    const totalQuestions = data?.length; // Safely access the length property
-    console.log(totalQuestions);
+    );
+    const totalQuestions = data?.length;
+
+    const isLastQuestion = currentQuestion === totalQuestions - 1;
 
     const handleNextQuestion = () => {
         dispatch(nextQuestion());
     };
 
-    const handleAnswerQuestion = (answer: string) => {
-        dispatch(answerQuestion(answer));
-    };
-
     const handleCalculateScore = () => {
         dispatch(calculateScore());
+        console.log("jestem");
     };
 
+    const handleChooseAnswer = (
+        event: React.ChangeEvent<HTMLInputElement>,
+        questionIndex: number
+    ) => {
+        const answer = event.target.value;
+        dispatch(answerQuestion({ answer, questionIndex }));
+    };
+
+    const currentAnswer = useSelector(
+        (state: RootState) => state.quiz.currentAnswer
+    );
+
     if (isLoading) {
-        return <div>Loading...</div>;
+        return (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+                <CircularProgress />
+            </Box>
+        );
     }
 
     if (!data || data.length === 0) {
@@ -46,18 +59,12 @@ const Quiz: React.FC = () => {
 
     const question = data[currentQuestion];
 
-    const choicesArray: Choice[] = Object.entries<any>(question.answers)
-        .filter(([key, value]) => value !== null)
+    const choicesArray: Choice[] = Object?.entries<any>(question.answers)
+        ?.filter(([key, value]) => value !== null)
         .map(([key, text], index) => ({ id: key, text: text as string }));
 
-    console.log(data);
-    // const question = data[currentQuestion];
-    console.log(choicesArray);
     return (
         <>
-            {/* <div className="uppercase tracking-wide text-sm text-indigo-600 font-bold text-center">
-                {`QUESTION ${currentQuestion + 1}`}
-            </div> */}
             <div className="flex flex-col">
                 <div className="flex items-center justify-center relative">
                     <div className="absolute">
@@ -81,38 +88,45 @@ const Quiz: React.FC = () => {
                                 key={idx}
                             >
                                 <div className="flex items-center space-x-5">
-                                    <Radio />
+                                    <Radio
+                                        value={choice.id}
+                                        checked={choice.id === currentAnswer}
+                                        onChange={(event) =>
+                                            handleChooseAnswer(
+                                                event,
+                                                question.id
+                                            )
+                                        }
+                                    />
                                     <div>{choice?.text}</div>
                                 </div>
                             </div>
                         )
                     )}
                 </div>
-                {/* {question.choices.map((choice: object) => (
-                    <div key={choice.id}>
-                        <label>
-                            <input
-                                type="radio"
-                                name="choices"
-                                value={choice.id}
-                                onChange={() => handleAnswerQuestion(choice.id)}
-                            />
-                            {choice.text}
-                        </label>
-                    </div>
-                ))} */}
+
                 <div className="flex justify-center text-center mt-10">
-                    <Button
-                        variant="outlined"
-                        endIcon={<GrNext />}
-                        onClick={handleNextQuestion}
-                        sx={{ backgroundColor: "white", color: "black" }}
-                    >
-                        Next
-                    </Button>
-                    {/* <button className="m-2" onClick={handleCalculateScore}>
-                        Calculate Score
-                    </button> */}
+                    {!isLastQuestion && (
+                        <Button
+                            variant="outlined"
+                            endIcon={<GrNext />}
+                            onClick={handleNextQuestion}
+                            sx={{ backgroundColor: "white", color: "black" }}
+                        >
+                            Next
+                        </Button>
+                    )}
+
+                    {isLastQuestion && (
+                        <Button
+                            variant="outlined"
+                            sx={{ backgroundColor: "white", color: "black" }}
+                            className="m-2"
+                            onClick={handleCalculateScore}
+                        >
+                            Calculate Score
+                        </Button>
+                    )}
                 </div>
             </div>
         </>

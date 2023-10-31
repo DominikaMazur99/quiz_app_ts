@@ -30,6 +30,7 @@ export type Question = {
 export type QuizState = {
     questions: Question[];
     currentQuestionIndex: number;
-    currentAnswer: string[];
+    currentAnswer: string;
+    questionIndex: number;
     score: number | null;
 };

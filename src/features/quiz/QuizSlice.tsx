@@ -4,41 +4,72 @@ import { QuizState } from "../../services/types";
 const initialState: QuizState = {
     questions: [], // Store questions fetched from the API
     currentQuestionIndex: -1,
-    currentAnswer: [],
-    score: null,
+    currentAnswer: "",
+    questionIndex: 0,
+    score: 0,
 };
 
 export const quizSlice = createSlice({
     name: "quiz",
     initialState,
     reducers: {
+        setQuestions: (state, action) => {
+            state.questions = action.payload; // Set questions in the state
+        },
         startQuiz: (state) => {
             state.currentQuestionIndex = 0;
-            state.currentAnswer = [];
+            state.currentAnswer = "";
             state.score = null;
         },
         nextQuestion: (state) => {
             state.currentQuestionIndex++;
+            console.log(state.score, "score");
         },
-        answerQuestion: (state, action: PayloadAction<string>) => {
-            state.currentAnswer.push(action.payload);
-        },
-        calculateScore: (state) => {
-            state.score = 0;
-            state.currentAnswer.forEach((userAnswer, index) => {
-                const question = state.questions[index];
+        // Modify your reducer
+        answerQuestion: (
+            state,
+            action: PayloadAction<{ answer: string; questionIndex: number }>
+        ) => {
+            const { answer, questionIndex } = action.payload;
+            state.currentAnswer = answer;
+            state.questionIndex = questionIndex;
+
+            if (state.score === null) {
+                state.score = 0;
+            }
+
+            const question = state.questions.find(
+                (q) => q.id === questionIndex
+            );
+
+            if (question) {
                 if (
+                    answer &&
                     question.correct_answer.toLowerCase() ===
-                    userAnswer.toLowerCase()
+                        answer.toLowerCase()
                 ) {
-                    state.score!++;
+                    state.score++; // Increment the score by 1 if the answer is correct
+                    console.log(state.score);
                 }
-            });
+            } else {
+                console.error("Question not found or is undefined.");
+            }
+        },
+
+        calculateScore: (state) => {
+            // Initialize the score to 0 if it's not already set
+
+            console.log(state.score);
         },
     },
 });
 
-export const { startQuiz, nextQuestion, answerQuestion, calculateScore } =
-    quizSlice.actions;
+export const {
+    setQuestions,
+    startQuiz,
+    nextQuestion,
+    answerQuestion,
+    calculateScore,
+} = quizSlice.actions;
 
 export default quizSlice.reducer;

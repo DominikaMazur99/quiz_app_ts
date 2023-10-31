@@ -5,14 +5,14 @@ import Quiz from "./components/quizComponents/Quiz";
 
 function App() {
     return (
-        <>
+        <div className="px-4">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/home_page" element={<StartPage />} />
+                    <Route path="/" element={<StartPage />} />
                     <Route path="quiz" element={<Quiz />} />
                 </Routes>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 
