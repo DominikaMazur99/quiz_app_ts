@@ -55,21 +55,10 @@ export const quizSlice = createSlice({
                 console.error("Question not found or is undefined.");
             }
         },
-
-        calculateScore: (state) => {
-            // Initialize the score to 0 if it's not already set
-
-            console.log(state.score);
-        },
     },
 });
 
-export const {
-    setQuestions,
-    startQuiz,
-    nextQuestion,
-    answerQuestion,
-    calculateScore,
-} = quizSlice.actions;
+export const { setQuestions, startQuiz, nextQuestion, answerQuestion } =
+    quizSlice.actions;
 
 export default quizSlice.reducer;

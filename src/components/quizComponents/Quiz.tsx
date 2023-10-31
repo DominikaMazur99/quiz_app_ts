@@ -1,25 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useGetQuizQuery } from "../../services/quiz";
 import QuestionProgress from "../adds/QuestionProgress";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    nextQuestion,
-    answerQuestion,
-    calculateScore,
-} from "../../features/quiz/QuizSlice";
+import { nextQuestion, answerQuestion } from "../../features/quiz/QuizSlice";
 import { RootState } from "../../store";
 import { GrNext } from "react-icons/gr";
 import { Box, Button, CircularProgress, Radio } from "@mui/material";
 import { Choice } from "../../services/types";
 
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
 
 const Quiz: React.FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { data, isLoading } = useGetQuizQuery("linux");
     const currentQuestion = useSelector(
         (state: RootState) => state.quiz.currentQuestionIndex
     );
+
     const totalQuestions = data?.length;
 
     const isLastQuestion = currentQuestion === totalQuestions - 1;
@@ -29,8 +28,7 @@ const Quiz: React.FC = () => {
     };
 
     const handleCalculateScore = () => {
-        dispatch(calculateScore());
-        console.log("jestem");
+        navigate("/score");
     };
 
     const handleChooseAnswer = (
